@@ -269,13 +269,13 @@ async function buildDetail() {
 
   if (heroEl) {
     heroEl.innerHTML = `
-      <div class="detail-hero-inner">
-        <a class="back-link" href="${backMap[type] || 'index.html'}" style="color:rgba(255,255,255,.6)">${titleMap[type] || '返回'}</a>
+      <div class="detail-header-inner">
+        <a class="back-link" href="${backMap[type] || 'index.html'}">${titleMap[type] || '返回'}</a>
         <span class="detail-category">${titleMap[type] || type}</span>
         <h1 class="detail-title">${meta.title || ''}</h1>
         <div class="detail-meta">
-          ${meta.date ? `<span>📅 ${formatDate(meta.date)}</span>` : ''}
-          ${meta.author ? `<span>👤 ${meta.author}</span>` : ''}
+          ${meta.date ? `<span>${formatDate(meta.date)}</span>` : ''}
+          ${meta.author ? `<span>${meta.author}</span>` : ''}
           ${(meta.tags || []).map ? (meta.tags || []).map(t => `<span>#${t}</span>`).join('') : ''}
         </div>
       </div>`;
@@ -339,13 +339,13 @@ async function buildActivityDetail() {
 
   if (heroEl) {
     heroEl.innerHTML = `
-      <div class="detail-hero-inner">
-        <a class="back-link" href="activities.html" style="color:rgba(255,255,255,.6)">品牌活动</a>
+      <div class="detail-header-inner">
+        <a class="back-link" href="activities.html">品牌活动</a>
         <span class="detail-category">品牌活动</span>
         <h1 class="detail-title">${meta.title || ''}</h1>
         <div class="detail-meta">
-          ${meta.year ? `<span>📅 ${meta.year}年</span>` : ''}
-          ${meta.active === 'true' ? '<span>🟢 进行中</span>' : ''}
+          ${meta.year ? `<span>${meta.year}年</span>` : ''}
+          ${meta.active === 'true' ? '<span>进行中</span>' : ''}
         </div>
       </div>`;
   }
