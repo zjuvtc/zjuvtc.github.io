@@ -180,7 +180,24 @@ async function buildHome() {
   buildNav('home');
 
   const items = await loadIndex('news');
-  const grid  = qs('newsGrid');
+
+  // Hero right: show latest item
+  const featured = qs('heroFeatured');
+  if (featured && items.length) {
+    const f = items[0];
+    const img = f.cover
+      ? `<img src="${f.cover}" alt="${f.title}" loading="lazy">`
+      : '';
+    featured.innerHTML = `
+      <div class="hero-featured-img">${img}</div>
+      <div class="hero-featured-label">最新动态</div>
+      <div class="hero-featured-title">${f.title || ''}</div>
+      <div class="hero-featured-date">${formatDate(f.date)}</div>`;
+    featured.style.cursor = 'pointer';
+    featured.onclick = () => location.href = `detail.html?type=news&slug=${f._slug}`;
+  }
+
+  const grid = qs('newsGrid');
   if (!grid) return;
 
   if (!items.length) {
