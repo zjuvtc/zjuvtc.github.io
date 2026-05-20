@@ -1,0 +1,78 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate content indexes
+        run: |
+          python3 - <<'PYEOF'
+          import os, json
+          from pathlib import Path
+
+          def parse_frontmatter(text):
+              if not text.startswith('---'):
+                  return {}
+              end = text.find('---', 3)
+              if end == -1:
+                  return {}
+              meta = {}
+              for line in text[3:end].strip().splitlines():
+                  if ':' not in line:
+                      continue
+                  k, _, v = line.partition(':')
+                  k = k.strip()
+                  v = v.strip().strip('"\'')
+                  if v.startswith('[') and v.endswith(']'):
+                      meta[k] = [s.strip().strip('"\'') for s in v[1:-1].split(',') if s.strip()]
+                  else:
+                      meta[k] = v
+              return meta
+
+          for ctype in ['news', 'team', 'activities', 'sponsorship']:
+              folder = Path(f'content/{ctype}')
+              if not folder.exists():
+                  continue
+              items = []
+              for f in sorted(folder.glob('*.md'), reverse=True):
+                  meta = parse_frontmatter(f.read_text(encoding='utf-8'))
+                  meta['_slug'] = f.stem
+                  meta['_file'] = f.name
+                  items.append(meta)
+              (folder / 'index.json').write_text(
+                  json.dumps(items, ensure_ascii=False, indent=2),
+                  encoding='utf-8'
+              )
+              print(f'{ctype}: {len(items)} items indexed')
+          PYEOF
+
+      - uses: actions/configure-pages@v4
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

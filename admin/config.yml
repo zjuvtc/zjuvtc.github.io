@@ -1,0 +1,85 @@
+# ── Decap CMS Configuration ────────────────────────────────────────────────
+# Replace YOUR_GITHUB_USERNAME and YOUR_REPO_NAME with your actual values.
+# Replace YOUR_OAUTH_PROXY_URL with the Cloudflare Worker URL (see SETUP.md).
+
+backend:
+  name: github
+  repo: zjuvtc/zjuvtc.github.io
+  branch: main
+  base_url: YOUR_OAUTH_PROXY_URL   # e.g. https://jiaotuan-oauth.yourname.workers.dev
+
+# Images uploaded via the CMS will be stored here
+media_folder: "assets/img/uploads"
+public_folder: "assets/img/uploads"
+
+# ── Collections ─────────────────────────────────────────────────────────────
+collections:
+
+  # 新闻动态
+  - name: "news"
+    label: "新闻动态"
+    label_singular: "新闻"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "detail.html?type=news&slug={{slug}}"
+    fields:
+      - { label: "标题",    name: title,   widget: string }
+      - { label: "发布日期", name: date,    widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "封面图片", name: cover,   widget: image,    required: false }
+      - { label: "摘要",    name: summary, widget: text,     required: false }
+      - label: "标签"
+        name: tags
+        widget: list
+        required: false
+        field: { label: 标签, name: tag, widget: string }
+      - { label: "正文",    name: body,    widget: markdown }
+
+  # 团队成员
+  - name: "team"
+    label: "团队成员"
+    label_singular: "成员"
+    folder: "content/team"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "member.html?slug={{slug}}"
+    fields:
+      - { label: "姓名",     name: name,             widget: string }
+      - { label: "届次",     name: batch,            widget: string, required: false, hint: "如：第25届" }
+      - { label: "职务/角色", name: role,             widget: string, required: false, hint: "如：队长、支教老师" }
+      - { label: "照片",     name: photo,            widget: image,  required: false }
+      - { label: "学院",     name: school,           widget: string, required: false }
+      - { label: "支教地",   name: service_location, widget: string, required: false, hint: "如：云南省大理州" }
+      - { label: "个人简介", name: body,             widget: markdown }
+
+  # 品牌活动
+  - name: "activities"
+    label: "品牌活动"
+    label_singular: "活动"
+    folder: "content/activities"
+    create: true
+    slug: "{{slug}}"
+    preview_path: "activity.html?slug={{slug}}"
+    fields:
+      - { label: "活动名称", name: title,   widget: string }
+      - { label: "封面图片", name: cover,   widget: image,   required: false }
+      - { label: "简介",    name: summary, widget: text,    required: false }
+      - { label: "发起年份", name: year,    widget: number,  required: false }
+      - { label: "进行中",  name: active,  widget: boolean, default: true }
+      - { label: "活动详情", name: body,    widget: markdown }
+
+  # 赞助公示
+  - name: "sponsorship"
+    label: "赞助公示"
+    label_singular: "赞助"
+    folder: "content/sponsorship"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "detail.html?type=sponsorship&slug={{slug}}"
+    fields:
+      - { label: "标题",    name: title,   widget: string }
+      - { label: "发布日期", name: date,   widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "封面图片", name: cover,  widget: image,    required: false }
+      - { label: "赞助金额", name: amount, widget: string,   required: false, hint: "如：5万元" }
+      - { label: "赞助方",  name: sponsor, widget: string,   required: false }
+      - { label: "公示正文", name: body,   widget: markdown }
