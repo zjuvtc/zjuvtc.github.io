@@ -53,7 +53,7 @@ function buildNav(active) {
   nav.innerHTML = `
     <div class="nav-inner">
       <a class="nav-logo" href="index.html">
-        <div class="nav-logo-icon">支</div>
+        <div class="nav-logo-mark">支</div>
         <span>浙大研究生支教团</span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>

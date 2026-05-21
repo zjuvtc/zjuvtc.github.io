@@ -127,11 +127,25 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .btn-outline:hover { border-color: var(--ink-3); }
 
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+  transition: color 0.15s, border-color 0.15s;
+}
+.btn-ghost:hover { color: var(--green); border-color: var(--green); }
+
 /* ── Hero ───────────────────────────────────────────────────────────────────── */
 .hero {
+  background: var(--bg-2);
   border-top: 4px solid var(--green);
   padding: calc(var(--nav-h) + 56px) 0 0;
   border-bottom: 1px solid var(--line);
+  min-height: 480px;
 }
 
 .hero-inner {
