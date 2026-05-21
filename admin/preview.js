@@ -7,14 +7,16 @@ var h = window.h;
 /* ── News & Sponsorship detail ───────────────────────────────────────────── */
 function makeDetailPreview(category) {
   return function DetailPreview(_ref) {
-    var entry = _ref.entry;
+    var entry    = _ref.entry;
     var widgetFor = _ref.widgetFor;
+    var getAsset = _ref.getAsset;
     var d = entry.get('data');
-    var cover = d.get('cover');
-    var title = d.get('title') || '';
-    var date  = d.get('date')  || '';
+    var cover  = d.get('cover');
+    var title  = d.get('title')  || '';
+    var date   = d.get('date')   || '';
     var author = d.get('author') || '';
-    var tags = d.get('tags');
+    var tags   = d.get('tags');
+    var coverUrl = cover ? getAsset(cover).toString() : null;
 
     return h('div', {},
       h('header', { className: 'detail-header' },
@@ -30,8 +32,8 @@ function makeDetailPreview(category) {
           )
         )
       ),
-      cover
-        ? h('div', { className: 'detail-cover' }, h('img', { src: cover, alt: title }))
+      coverUrl
+        ? h('div', { className: 'detail-cover' }, h('img', { src: coverUrl, alt: title }))
         : null,
       h('div', { className: 'post-content post-body' }, widgetFor('body'))
     );
@@ -40,18 +42,20 @@ function makeDetailPreview(category) {
 
 /* ── Team member ─────────────────────────────────────────────────────────── */
 function MemberPreview(_ref) {
-  var entry = _ref.entry;
+  var entry    = _ref.entry;
   var widgetFor = _ref.widgetFor;
+  var getAsset = _ref.getAsset;
   var d = entry.get('data');
   var photo           = d.get('photo');
-  var name            = d.get('name')            || '';
-  var role            = d.get('role')            || '';
-  var batch           = d.get('batch')           || '';
-  var serviceLocation = d.get('service_location')|| '';
-  var school          = d.get('school')          || '';
+  var name            = d.get('name')             || '';
+  var role            = d.get('role')             || '';
+  var batch           = d.get('batch')            || '';
+  var serviceLocation = d.get('service_location') || '';
+  var school          = d.get('school')           || '';
+  var photoUrl = photo ? getAsset(photo).toString() : null;
 
-  var photoEl = photo
-    ? h('img', { src: photo, alt: name })
+  var photoEl = photoUrl
+    ? h('img', { src: photoUrl, alt: name })
     : h('div', { style: { fontSize: '4rem', textAlign: 'center', padding: '24px 0', background: '#f6f6f4' } }, '👤');
 
   return h('div', { className: 'member-detail-wrap', style: { padding: '40px 32px' } },
@@ -70,13 +74,15 @@ function MemberPreview(_ref) {
 
 /* ── Activity detail ─────────────────────────────────────────────────────── */
 function ActivityPreview(_ref) {
-  var entry = _ref.entry;
+  var entry    = _ref.entry;
   var widgetFor = _ref.widgetFor;
+  var getAsset = _ref.getAsset;
   var d = entry.get('data');
   var cover  = d.get('cover');
   var title  = d.get('title') || '';
   var year   = d.get('year')  || '';
   var active = d.get('active');
+  var coverUrl = cover ? getAsset(cover).toString() : null;
 
   return h('div', {},
     h('header', { className: 'detail-header' },
@@ -89,8 +95,8 @@ function ActivityPreview(_ref) {
         )
       )
     ),
-    cover
-      ? h('div', { className: 'detail-cover' }, h('img', { src: cover, alt: title }))
+    coverUrl
+      ? h('div', { className: 'detail-cover' }, h('img', { src: coverUrl, alt: title }))
       : null,
     h('div', { className: 'post-content post-body' }, widgetFor('body'))
   );
