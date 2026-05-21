@@ -325,14 +325,14 @@ async function buildMember() {
     ? `<img src="${meta.photo}" alt="${meta.name}">`
     : `<div style="font-size:4rem">👤</div>`;
 
+  wrap.insertAdjacentHTML('beforebegin', `<a class="back-link member-back" href="team.html">返回团队</a>`);
   wrap.innerHTML = `
     <div class="member-sidebar">
-      <a class="back-link" href="team.html">返回团队</a>
       <div class="member-photo-lg">${photoContent}</div>
       <div class="member-sidebar-name">${meta.name || ''}</div>
       <div class="member-sidebar-role">${meta.role || ''}${meta.batch ? ' · ' + meta.batch : ''}</div>
       ${meta.service_location ? `<div class="member-sidebar-location">${meta.service_location}</div>` : ''}
-      ${meta.school ? `<span class="member-sidebar-tag">🏫 ${meta.school}</span>` : ''}
+      ${meta.school ? `<span class="member-sidebar-school">🏫 ${meta.school}</span>` : ''}
     </div>
     <div class="post-body">${md(content)}</div>`;
 }

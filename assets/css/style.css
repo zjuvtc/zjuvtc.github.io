@@ -600,10 +600,17 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .post-body th { font-weight: 700; color: var(--ink); background: var(--bg-2); }
 
 /* ── Member Detail ──────────────────────────────────────────────────────────── */
+.member-back {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: calc(var(--nav-h) + 32px) 32px 0;
+}
+
 .member-detail-wrap {
   max-width: 900px;
   margin: 0 auto;
-  padding: calc(var(--nav-h) + 48px) 32px 80px;
+  padding: 24px 32px 80px;
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 48px;
