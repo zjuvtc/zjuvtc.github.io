@@ -3,10 +3,8 @@
 # Replace YOUR_OAUTH_PROXY_URL with the Cloudflare Worker URL (see SETUP.md).
 
 backend:
-  name: github
-  repo: zjuvtc/zjuvtc.github.io
+  name: git-gateway
   branch: main
-  base_url: https://zjuvtc-cms.2273369951.workers.dev
 
 # Images uploaded via the CMS will be stored here
 media_folder: "assets/img/uploads"
