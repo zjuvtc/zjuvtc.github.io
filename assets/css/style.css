@@ -605,12 +605,15 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-style: italic;
 }
 .post-body pre {
-  background: #1a1a1a;
-  color: #e0e0e0;
-  padding: 16px;
+  background: var(--bg-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ink-3);
+  padding: 16px 20px;
   overflow-x: auto;
   margin: 1.5em 0;
   font-size: 0.87em;
+  line-height: 1.6;
 }
 .post-body code {
   background: var(--bg-2);
