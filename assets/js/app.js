@@ -1,5 +1,6 @@
 /* ── Helpers ───────────────────────────────────────────────────────────────── */
 marked.use({
+  breaks: true,
   renderer: {
     image({ href, title, text }) {
       const img = `<img src="${href}" alt="${text || ''}" loading="lazy">`;
