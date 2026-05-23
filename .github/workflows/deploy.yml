@@ -1,10 +1,8 @@
 name: Deploy to GitHub Pages
 
-# Disabled: site is now deployed via Netlify
-# on:
-#   push:
-#     branches: [main]
-#   workflow_dispatch:
+# Disabled: site is now deployed via Netlify (manual trigger only)
+on:
+  workflow_dispatch:
 
 permissions:
   contents: read
