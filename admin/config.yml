@@ -4,6 +4,7 @@
 
 backend:
   name: git-gateway
+  base_url: https://zjuvtc.netlify.app
   branch: main
 
 # Images uploaded via the CMS will be stored here
