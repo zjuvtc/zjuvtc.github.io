@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>联系我们 — 浙大研究生支教团</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body data-page="contact">
 
@@ -59,11 +60,7 @@
 
       <!-- Right: Map -->
       <div class="map-wrap">
-        <iframe
-          src="https://www.openstreetmap.org/export/embed.html?bbox=120.0678%2C30.3045%2C120.0978%2C30.3245&layer=mapnik&marker=30.3145%2C120.0828"
-          loading="lazy"
-          title="浙江大学紫金港校区">
-        </iframe>
+        <div id="map" style="width:100%;height:100%;"></div>
       </div>
     </div>
   </main>
@@ -77,5 +74,14 @@
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="assets/js/app.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map', { zoomControl: true }).setView([30.3145, 120.0828], 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    }).addTo(map);
+    L.marker([30.3145, 120.0828]).addTo(map).bindPopup('浙江大学紫金港校区').openPopup();
+  </script>
 </body>
 </html>
