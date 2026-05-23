@@ -82,6 +82,7 @@
   <script src="assets/js/app.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
+    netlifyIdentity.init({ APIUrl: "https://zjuvtc.netlify.app/.netlify/identity" });
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on('init', function(user) {
         if (!user) {
