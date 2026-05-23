@@ -54,7 +54,7 @@ function buildNav(active) {
     <div class="nav-inner">
       <a class="nav-logo" href="index.html">
         <img class="nav-logo-mark" src="assets/img/logo.jpg" alt="支教团logo">
-        <span>浙大研究生支教团</span>
+        <span>浙江大学研究生支教团（新疆阿克苏分团）</span>
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="菜单">☰</button>
       <ul class="nav-links" id="navLinks">
