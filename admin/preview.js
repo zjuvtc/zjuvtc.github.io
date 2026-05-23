@@ -102,8 +102,37 @@ function ActivityPreview(_ref) {
   );
 }
 
-/* ── Register ────────────────────────────────────────────────────────────── */
+/* ── Register preview templates ──────────────────────────────────────────── */
 CMS.registerPreviewTemplate('news',        makeDetailPreview('新闻动态'));
 CMS.registerPreviewTemplate('sponsorship', makeDetailPreview('赞助公示'));
 CMS.registerPreviewTemplate('team',        MemberPreview);
 CMS.registerPreviewTemplate('activities',  ActivityPreview);
+
+/* ── Text alignment editor components ───────────────────────────────────── */
+var alignConfigs = [
+  { id: 'align-left',   label: '⬅ 左对齐', align: 'left'   },
+  { id: 'align-center', label: '↔ 居中',   align: 'center' },
+  { id: 'align-right',  label: '➡ 右对齐', align: 'right'  },
+];
+
+alignConfigs.forEach(function(cfg) {
+  CMS.registerEditorComponent({
+    id:     cfg.id,
+    label:  cfg.label,
+    fields: [{ name: 'content', label: '文字内容', widget: 'text' }],
+    pattern: new RegExp(
+      '^<p style="text-align:' + cfg.align + '">((?:.|\\n)*?)<\\/p>$'
+    ),
+    fromBlock: function(match) {
+      return { content: match[1].replace(/<br>/g, '\n') };
+    },
+    toBlock: function(obj) {
+      var content = (obj.content || '').replace(/\n/g, '<br>');
+      return '<p style="text-align:' + cfg.align + '">' + content + '</p>';
+    },
+    toPreview: function(obj) {
+      var content = (obj.content || '').replace(/\n/g, '<br>');
+      return '<p style="text-align:' + cfg.align + '">' + content + '</p>';
+    },
+  });
+});
