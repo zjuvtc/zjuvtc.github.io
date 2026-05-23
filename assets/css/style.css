@@ -585,6 +585,16 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .post-body ul, .post-body ol { padding-left: 1.4em; margin-bottom: 1.15em; }
 .post-body li { margin-bottom: 0.35em; }
 .post-body img { margin: 1.5em 0; }
+.post-body .post-figure { margin: 1.5em 0; }
+.post-body .post-figure img { margin: 0; width: 100%; }
+.post-body .post-figure figcaption {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--ink-3);
+  margin-top: 6px;
+  font-style: italic;
+  line-height: 1.5;
+}
 .post-body blockquote {
   border-left: 3px solid var(--green);
   padding: 8px 16px;

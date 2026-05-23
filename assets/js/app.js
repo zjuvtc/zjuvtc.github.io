@@ -1,4 +1,16 @@
 /* ── Helpers ───────────────────────────────────────────────────────────────── */
+marked.use({
+  renderer: {
+    image({ href, title, text }) {
+      const img = `<img src="${href}" alt="${text || ''}" loading="lazy">`;
+      if (title) {
+        return `<figure class="post-figure">${img}<figcaption>${title}</figcaption></figure>`;
+      }
+      return img;
+    }
+  }
+});
+
 const md       = t => t ? marked.parse(t)       : '';
 const mdInline = t => t ? marked.parseInline(t) : '';
 const qs  = id => document.getElementById(id);
