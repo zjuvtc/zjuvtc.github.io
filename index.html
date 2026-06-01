@@ -84,12 +84,11 @@
   <script>
     netlifyIdentity.init({ APIUrl: "https://zjuvtc.netlify.app/.netlify/identity" });
     const hash = window.location.hash;
-    if (hash.includes('invite_token') || hash.includes('recovery_token')) {
-      netlifyIdentity.open();
-    }
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on('init', function(user) {
-        if (!user) {
+        if (hash.includes('invite_token') || hash.includes('recovery_token')) {
+          netlifyIdentity.open();
+        } else if (!user) {
           window.netlifyIdentity.on('login', function() {
             document.location.href = '/admin/';
           });
