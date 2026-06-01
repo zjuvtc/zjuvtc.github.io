@@ -82,18 +82,20 @@
   <script src="assets/js/app.js"></script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
-    netlifyIdentity.init({ APIUrl: "https://zjuvtc.netlify.app/.netlify/identity" });
     const hash = window.location.hash;
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', function(user) {
-        if (hash.includes('invite_token') || hash.includes('recovery_token')) {
-          netlifyIdentity.open();
-        } else if (!user) {
-          window.netlifyIdentity.on('login', function() {
-            document.location.href = '/admin/';
-          });
-        }
-      });
+    if (hash.includes('invite_token') || hash.includes('recovery_token')) {
+      window.location.replace('/admin/' + hash);
+    } else {
+      netlifyIdentity.init({ APIUrl: "https://zjuvtc.netlify.app/.netlify/identity" });
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', function(user) {
+          if (!user) {
+            window.netlifyIdentity.on('login', function() {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
     }
   </script>
 </body>
