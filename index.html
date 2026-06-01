@@ -83,6 +83,10 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     netlifyIdentity.init({ APIUrl: "https://zjuvtc.netlify.app/.netlify/identity" });
+    const hash = window.location.hash;
+    if (hash.includes('invite_token') || hash.includes('recovery_token')) {
+      netlifyIdentity.open();
+    }
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on('init', function(user) {
         if (!user) {
