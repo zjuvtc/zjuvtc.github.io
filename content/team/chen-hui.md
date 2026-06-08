@@ -28,4 +28,4 @@ service_location: 新疆阿克苏地区
 print("Hello zjuvtc!")
 ```
 
-> 你们好，我是陈同志。
+> 你们好，我是陈同志。是一名伟大的心理委员。
